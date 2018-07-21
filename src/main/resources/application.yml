@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: index
+  h2:
+    console:
+      path: /index/h2-console
+  datasource:
+    url: jdbc:h2:file:~/index/db;FILE_LOCK=FS
+    username: sa
+    password: sa
+
+server:
+  port: 9999
+  address: 127.0.0.1
+
+logging:
+  file: ${user.home}/index/index.log
+  level.com.tap: debug
+
+swagger:
+  basePackage: com.nekolr.index
+  title: '时尚指数'
+  description: '时尚指数接口服务'
+  version: 0.0.1-snapshot
+  host: fashion.nekolr.com
