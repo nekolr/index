@@ -4,19 +4,57 @@ spring:
   h2:
     console:
       path: /index/h2-console
+  jpa:
+    database: h2
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  # 默认数据源
   datasource:
+    driver-class-name: org.h2.Driver
     url: jdbc:h2:file:~/index/db;FILE_LOCK=FS
     username: sa
     password: sa
-
+    # 连接池配置（默认 HikariCP）
+    # 本项目要求 type 是必填的
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: HikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+# 自定义配置
+custom:
+  # 自定义数据源
+  datasource:
+    ds1:
+      # 如果没有继承配置，或者继承设置为 false，则至少需要提供 type 配置
+      # 如果继承设置为 true，则可以不指定 type，除了基本配置外其他配置全部继承自默认数据源配置
+      extend: true
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:~/index/db1;FILE_LOCK=FS
+      username: sa
+      password: sa
+    ds2:
+      extend: false
+      type: com.zaxxer.hikari.HikariDataSource
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:file:~/index/db2;FILE_LOCK=FS
+      username: sa
+      password: sa
+# Web 容器配置
 server:
   port: 9999
   address: 127.0.0.1
-
+# 日志配置
 logging:
   file: ${user.home}/index/index.log
   level.com.tap: debug
-
+# Swagger 配置
 swagger:
   basePackage: com.nekolr.index
   title: '时尚指数'
