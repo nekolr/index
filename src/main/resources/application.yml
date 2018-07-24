@@ -27,6 +27,21 @@ spring:
       max-lifetime: 1800000
       connection-timeout: 30000
       connection-test-query: SELECT 1
+# Web 容器配置
+server:
+  port: 9999
+  address: 127.0.0.1
+# 日志配置
+logging:
+  file: ${user.home}/index/index.log
+  level.com.tap: debug
+# Swagger 配置
+swagger:
+  basePackage: com.nekolr.index
+  title: '时尚指数'
+  description: '时尚指数接口服务'
+  version: 0.0.1-snapshot
+  host: fashion.nekolr.com
 # 自定义配置
 custom:
   # 自定义数据源
@@ -46,18 +61,3 @@ custom:
       url: jdbc:h2:file:~/index/db2;FILE_LOCK=FS
       username: sa
       password: sa
-# Web 容器配置
-server:
-  port: 9999
-  address: 127.0.0.1
-# 日志配置
-logging:
-  file: ${user.home}/index/index.log
-  level.com.tap: debug
-# Swagger 配置
-swagger:
-  basePackage: com.nekolr.index
-  title: '时尚指数'
-  description: '时尚指数接口服务'
-  version: 0.0.1-snapshot
-  host: fashion.nekolr.com

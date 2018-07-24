@@ -20,6 +20,8 @@ import java.util.Map;
 
 /**
  * 注册动态数据源时，默认数据源需要手动注册
+ *
+ * @author nekolr
  */
 public class AbstractDynamicDataSourceRegister implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 

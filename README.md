@@ -1,4 +1,4 @@
-# 动态数据源
+## 动态数据源
 - `AbstractRoutingDataSource` 有两个属性 `targetDataSources` 和 `defaultTargetDataSource`，在 Spring 容器初始化过程中根据配置文件信息手动创建 `DataSource`，分别给这两个属性赋值，这样在 Spring 初始化完毕后容器中就加载了所有的 `DataSource`。
 - 实现 `AbstractRoutingDataSource` 的 `determineCurrentLookupKey` 方法，该方法提供一个数据源的名称，这里实现为获取当前线程使用的数据源名称。
 - 创建多数据源注解，在 DAO 层使用该注解，注解提供一个属性值表示使用的数据源名称。
@@ -22,4 +22,6 @@ protected DataSource determineTargetDataSource() {
   }
   return dataSource;
 }
-  ```
+```
+## Selenium
+将人的操作编写为程序代码，然后 Selenium 就通过驱动向浏览器发送命令，从而模拟人的行为。
