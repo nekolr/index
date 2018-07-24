@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * JSON 工具类
@@ -37,5 +38,13 @@ public class JsonUtils {
             e.printStackTrace();
         }
         return JSONArray.parseArray(jsonString, type);
+    }
+
+    public static Map<String, Object> readObject(String jsonText) {
+        return (Map<String, Object>) JSONObject.parse(jsonText);
+    }
+
+    public static List<Object> readArray(String jsonText) {
+        return (List<Object>) JSONArray.parse(jsonText);
     }
 }
