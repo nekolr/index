@@ -62,7 +62,7 @@ public class BaiDuIndex {
     /**
      * chrome 可执行文件 URL
      */
-    private static final String CHROME_BINARY_URL = "";
+    private static final String CHROME_BINARY_URL = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
 
     /**
      * 获取所有指数接口前缀
