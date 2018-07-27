@@ -32,4 +32,11 @@ public class InnerController extends BaseController {
 
         return assembleResultOfSuccess("操作成功");
     }
+
+    @GetMapping("/quit")
+    @ApiOperation(value = "退出远程控制", notes = "退出远程控制")
+    public ResultBean quit() {
+        BaiDuIndex.quit();
+        return assembleResultOfSuccess("操作成功");
+    }
 }

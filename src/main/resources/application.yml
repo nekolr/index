@@ -40,7 +40,8 @@ server:
 # 日志配置
 logging:
   file: ${user.home}/index/index.log
-  level.com.tap: debug
+  level:
+    com.nekolr: debug
 # Swagger 配置
 swagger:
   basePackage: com.nekolr.index

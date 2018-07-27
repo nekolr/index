@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 百度搜索指数模拟登录以及抓取数据
@@ -95,6 +96,11 @@ public class BaiDuIndex {
     private static WebDriver driver;
 
     /**
+     * 记录 mockSearch 使用的次数
+     */
+    private static AtomicInteger entryCount = new AtomicInteger(0);
+
+    /**
      * 标签页窗口存储
      */
     private static Map<String, String> windowBundlesCache = new HashMap<>(3);
@@ -116,8 +122,10 @@ public class BaiDuIndex {
         try {
             // 初始化 RemoteWebDriver
             driver = new RemoteWebDriver(new URL(REMOTE_CLIENT_URL), DesiredCapabilities.chrome());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException var1) {
+            log.error("远程控制客户端 URL 有误", var1);
+        } catch (WebDriverException var2) {
+            log.error("初始化 RemoteWebDriver 出错", var2);
         }
     }
 
@@ -127,6 +135,12 @@ public class BaiDuIndex {
      * @throws InterruptedException
      */
     public static void mockSearch() {
+        // 记录进入次数
+        entryCount.incrementAndGet();
+        // 如果还在运行中，直接返回
+        if (isRunning() && entryCount.get() != 1) {
+            return;
+        }
         // 打开主页
         driver.get(MAIN_PAGE);
         // 存储主页窗口句柄
@@ -270,6 +284,32 @@ public class BaiDuIndex {
             log.error("执行发生错误", e);
         }
         return null;
+    }
+
+    /**
+     * 关闭浏览器，推出
+     */
+    public static void quit() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
+    /**
+     * 是否还在运行中
+     *
+     * @return
+     */
+    public static boolean isRunning() {
+        if (driver != null) {
+            try {
+                return driver.getWindowHandles().size() != 0;
+            } catch (WebDriverException e) {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
