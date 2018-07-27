@@ -24,4 +24,15 @@ protected DataSource determineTargetDataSource() {
 }
 ```
 ## Selenium
-将人的操作编写为程序代码，然后 Selenium 就通过驱动向浏览器发送命令，从而模拟人的行为。
+将人的操作编写为程序代码，然后 Selenium 就通过驱动向浏览器发送命令，从而模拟人的行为。  
+
+### 时尚指数数据抓取的思路
+一台 Windows 客户端，一台服务端，服务端发布接口，同时通过 RemoteWebDriver 控制客户端进行浏览器的各种操作，并将浏览的数据获取后，存入本地的 Redis 中。  
+
+客户端的准备：  
+
+1. 下载对应浏览器的 [WebDriver](https://docs.seleniumhq.org/download/)
+2. 下载 [selenium-server-standalone.jar](https://docs.seleniumhq.org/download/)，移动到 WebDriver 同一目录下，运行。
+3. 使用 natapp 开启内网穿透。
+4. 服务端连接 natapp 提供的访问地址，发送指令给客户端，完成浏览器操作等。  
+
