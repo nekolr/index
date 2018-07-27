@@ -9,6 +9,12 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  redis:
+    # 数据库分片索引，默认为 0
+    database: 0
+    host: localhost
+    port: 6379
+    password:
   # 默认数据源
   datasource:
     driver-class-name: org.h2.Driver

@@ -2,10 +2,12 @@ package com.nekolr.index.api;
 
 import com.nekolr.index.common.BaseController;
 import com.nekolr.index.common.ResultBean;
+import com.nekolr.index.dao.redis.IndexRedisRepository;
 import com.nekolr.index.model.*;
 import com.nekolr.index.util.JsonUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +16,11 @@ import java.io.FileNotFoundException;
 
 @RestController
 @RequestMapping("/v1")
-@Api(value = "index", tags = "时尚指数API")
+@Api(value = "index", tags = "时尚指数 API")
 public class IndexController extends BaseController {
+
+    @Autowired
+    private IndexRedisRepository indexRedisRepository;
 
     @GetMapping("/chinaMap")
     @ApiOperation(value = "中国地图数据", notes = "中国地图数据")
@@ -53,6 +58,12 @@ public class IndexController extends BaseController {
         return assembleResultOfSuccess(
                 JsonUtils.readObject("classpath:static/age.json", Age.class)
         );
+    }
+
+    @GetMapping("/crowd")
+    @ApiOperation(value = "人群画像之年龄和性别分布", notes = "人群画像之年龄和性别分布")
+    public ResultBean crowd() {
+        return assembleResultOfSuccess(indexRedisRepository.getCrowd("crowd"));
     }
 
     @GetMapping("/mediaIndex")
