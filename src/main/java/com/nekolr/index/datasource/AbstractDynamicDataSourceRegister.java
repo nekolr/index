@@ -48,7 +48,7 @@ public class AbstractDynamicDataSourceRegister implements ImportBeanDefinitionRe
     /**
      * 别名处理
      */
-    private final static ConfigurationPropertyNameAliases aliases = new ConfigurationPropertyNameAliases();
+    private final static ConfigurationPropertyNameAliases ALIASES = new ConfigurationPropertyNameAliases();
 
     /**
      * 默认数据源
@@ -129,7 +129,7 @@ public class AbstractDynamicDataSourceRegister implements ImportBeanDefinitionRe
      */
     private void bind(DataSource dataSource, Map<String, Object> config) {
         ConfigurationPropertySource source = new MapConfigurationPropertySource(config);
-        Binder binder = new Binder(new ConfigurationPropertySource[]{source.withAliases(aliases)});
+        Binder binder = new Binder(new ConfigurationPropertySource[]{source.withAliases(ALIASES)});
         binder.bind(ConfigurationPropertyName.EMPTY, Bindable.ofInstance(dataSource));
     }
 
@@ -143,7 +143,7 @@ public class AbstractDynamicDataSourceRegister implements ImportBeanDefinitionRe
      */
     private <T extends DataSource> T bind(Class<T> type, Map<String, Object> config) {
         ConfigurationPropertySource source = new MapConfigurationPropertySource(config);
-        Binder binder = new Binder(new ConfigurationPropertySource[]{source.withAliases(aliases)});
+        Binder binder = new Binder(new ConfigurationPropertySource[]{source.withAliases(ALIASES)});
         return binder.bind(ConfigurationPropertyName.EMPTY, Bindable.of(type)).get();
     }
 
@@ -181,7 +181,7 @@ public class AbstractDynamicDataSourceRegister implements ImportBeanDefinitionRe
         /**
          * 部分数据源配置不同，所以在此处添加别名，避免切换数据源出现某些参数无法注入的情况
          */
-        aliases.addAliases("url", new String[]{"jdbc-url"});
-        aliases.addAliases("username", new String[]{"user"});
+        ALIASES.addAliases("url", new String[]{"jdbc-url"});
+        ALIASES.addAliases("username", new String[]{"user"});
     }
 }

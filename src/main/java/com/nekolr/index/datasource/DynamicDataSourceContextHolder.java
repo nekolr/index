@@ -13,7 +13,7 @@ public class DynamicDataSourceContextHolder {
     /**
      * 数据源上下文，持有当前线程的数据源名称
      */
-    private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
+    private static final ThreadLocal<String> CONTEXT_HOLDER = new ThreadLocal<>();
 
     /**
      * 数据源名称集合
@@ -26,7 +26,7 @@ public class DynamicDataSourceContextHolder {
      * @param dataSourceKey
      */
     public static void setDataSourceKey(String dataSourceKey) {
-        contextHolder.set(dataSourceKey);
+        CONTEXT_HOLDER.set(dataSourceKey);
     }
 
     /**
@@ -35,14 +35,14 @@ public class DynamicDataSourceContextHolder {
      * @return
      */
     public static String getContextKey() {
-        return contextHolder.get();
+        return CONTEXT_HOLDER.get();
     }
 
     /**
      * 删除当前线程的数据源名称
      */
     public static void clearDataSourceKey() {
-        contextHolder.remove();
+        CONTEXT_HOLDER.remove();
     }
 
     /**
