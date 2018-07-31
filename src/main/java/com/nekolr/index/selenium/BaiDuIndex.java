@@ -176,9 +176,9 @@ public class BaiDuIndex {
             // 定位到密码输入框
             WebElement passwordInputPassword = form.findElement(By.name("password"));
             // 输入账号
-            accountInputText.sendKeys("");
+            accountInputText.sendKeys("BlcSaber");
             // 输入密码
-            passwordInputPassword.sendKeys("");
+            passwordInputPassword.sendKeys("lulin872171559");
             // 提交表单
             form.submit();
 
@@ -309,6 +309,8 @@ public class BaiDuIndex {
             driver.quit();
             // 清空窗口缓存
             windowBundlesCache.clear();
+            // 设置初始值
+            entryCount.set(0);
         }
     }
 
