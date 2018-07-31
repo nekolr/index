@@ -7,6 +7,5 @@ import java.util.List;
 @Data
 public class Index {
     private String period;
-    private List<String> pc;
-    private List<String> mobile;
+    private List<String> all;
 }
