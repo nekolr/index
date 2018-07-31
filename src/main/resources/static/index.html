@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="//www.echartsjs.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        font-family: "微软雅黑";
+        text-decoration: none;
+        list-style: none;
+    }
+    .main3-out {
+        width: 24%;
+        height: 30%;
+        margin: 0;
+        position: absolute;
+        left:5%;
+        top:8%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    .main2-out {
+        width: 24%;
+        height: 30%;
+        margin: 0;
+        position: absolute;
+        left:5%;
+        top:45%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    .main2-top{
+        width: 448px;
+        height: 63px;
+        background:url(images/ditu.png) center center no-repeat;
+        position: absolute;
+        left:0px;
+        top:-34px;
+        line-height: 53px;
+        text-align: center;
+        color:#fff;
+        font-size: 24px;
+    }
+    .main2-left{
+        position: absolute;
+        left:7%;
+        top:16%;
+    }
+    .main2-left li{
+        margin-top:46%;
+        color: #fff;
+    }
+    .main2-left li:nth-child(1) span{
+        color:#f34851;
+    }
+    .main2-left li:nth-child(2) span{
+        color:#85beff;
+    }
+    .main2-left li:nth-child(3) span{
+        color:#f0af00;
+    }
+    #main2{
+        width: 448px;
+        height: 261px;
+        position: absolute;
+        left:0px;
+        top:34px;
+    }
+    #main{
+        width:867px;
+        height:775px;
+        margin:0 auto;
+    }
+    .main4-out {
+        width: 24%;
+        height: 40%;
+        margin: 0;
+        position: absolute;
+        right:5%;
+        top:8%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    #container3{
+        position: absolute;
+        right: 0;
+    }
+    #container4{
+        position: absolute;
+        left:32%;
+        top:52%;
+    }
+    .main5-out {
+        width: 24%;
+        height: 20%;
+        margin: 0;
+        position: absolute;
+        right:5%;
+        top:54%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    .swiper-container {
+        margin-top: 40px;
+      width: 90%;
+      height: 140px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background:transparent;
+    /*  display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;*/
+      /*display: flex;*/
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .slide{
+      width: 90%;
+      height: 50%;
+      text-align: left;
+      margin:0 auto;
+    }
+    .slide-left{
+      width: 19px;
+      height: 19px;
+      background: #f34851;
+      float: left;
+      text-align: center;
+      line-height: 19px;
+      font-size: 9px;
+      color:#fff;
+    }
+    .slide-right{
+      float: left;
+      margin-left: 13px;
+    }
+    .main6-out{
+        width: 43%;
+        height: 30%;
+        margin: 0;
+        position: absolute;
+        left:5%;
+        top:83%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    .main7-out{
+        width: 43%;
+        height: 30%;
+        margin: 0;
+        position: absolute;
+        right:5%;
+        top:83%;
+        border: 2px solid #8c87d9;
+        border-radius: 10px;
+    }
+    .main4-left{
+        position: absolute;
+        width: 50%;
+        top:63%;
+        left:5%;
+    }
+    .main4-left-top{
+        color:#fff;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .main4-left-botttom{
+        width: 100%;
+        height: 61px;
+        margin-top: 10%;
+    }
+    .main4-left-botttom1{
+        width: 16%;
+        height: 100%;
+    }
+    .main4-left-botttom1{
+        float: left;
+    }
+    .top{
+      width: 30%;
+      height: 10%;
+      position: absolute;
+      left:35%;
+      top:4%;
+      background: url(images/top.png) center center no-repeat;
+    }
+    </style>
+</head>
+<body style="height:1142px;background:url(images/echarts.jpg) no-repeat;background-size:cover; " >
+    <div class='main3-out'>
+        <div class='main2-top'>最热品牌</div>
+        <div class='main2-left'>
+            <li><span>1</span> &nbsp;&nbsp;铜牛</li>
+            <li><span>2</span> &nbsp;&nbsp;铜牛</li>
+            <li><span>3</span> &nbsp;&nbsp;铜牛</li>
+            <li>4 &nbsp;&nbsp;铜牛</li>
+        </div>
+        <div id="container3" style="width: 80%;height: 100%"></div>
+    </div>
+    <div class='main2-out'>
+        <div class='main2-top'>热词云图</div>
+        
+        <div id='main2'></div>
+    </div>
+    <div id="main"></div>
+    <div id="container4" style="width: 12%;height: 27%"></div>
+
+    <div class='main4-out'>
+        <div class='main2-top'>人群画像</div>
+        <div class="main4-left">
+            <div class="main4-left-top">性别分布:</div>
+            <div class="main4-left-botttom">
+                <div class="main4-left-botttom1">
+                    <img src="images/nan.png">
+                </div>
+                <div class="main4-left-botttom1" style="margin-left: 4%">
+                    <div class="main4-left-botttom12" style="margin-top: 3%;font-size: 26px;color:#85beff">85%</div>
+                    <div class="main4-left-botttom12" style="margin-top: 3%;font-size: 14px;color:#85beff;text-align: center">男</div>
+                </div>
+                <div class="main4-left-botttom1" style="margin-left: 15%">
+                    <img src="images/nv.png">
+                </div>
+                <div class="main4-left-botttom1" style="margin-left: 4%">
+                    <div class="main4-left-botttom12" style="margin-top: 3%;font-size: 26px;color:#f34851">15%</div>
+                    <div class="main4-left-botttom12" style="margin-top: 3%;font-size: 14px;color:#f34851;text-align: center">女</div>
+                </div>
+
+            </div>
+        </div>
+        <div id="container" style="height: 60%;width: 100%"></div>
+        <div id="container2" style="width:50%;height: 40%;position: absolute;right:0"></div>
+
+    </div>
+    <div class='main5-out'>
+        <div class='main2-top'>资讯关注</div>
+         <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+          <div class="slide">
+              <div class="slide-left">1</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+          <div class="slide">
+              <div class="slide-left" style="background: #85beff">2</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+      </div>
+      <div class="swiper-slide">
+          <div class="slide">
+              <div class="slide-left">3</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+          <div class="slide">
+              <div class="slide-left" style="background: #85beff">4</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+      </div>
+      <div class="swiper-slide">
+          <div class="slide">
+              <div class="slide-left">5</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+          <div class="slide">
+              <div class="slide-left" style="background: #85beff">6</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+      </div>
+      <div class="swiper-slide">
+          <div class="slide">
+              <div class="slide-left">7</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+          <div class="slide">
+              <div class="slide-left" style="background: #85beff">8</div>
+              <div class="slide-right">
+                  <div class="slide-right-top" style="font-size: 16px;color: #fff">新一代奥迪Q3t低伪谍照 预计巴黎车展首发</div>
+                  <div class="slide-right-top" style="font-size: 12px;color: #c1c1c1;margin-top: 14px">新浪汽车  |  2018-07-16</div>
+              </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+    </div>
+    <div class='main6-out'>
+        <div class='main2-top'>搜索热度</div>
+       <div id="container5" style="height: 100%"></div>
+    </div>
+    <div class='main7-out'>
+        <div class='main2-top'>媒体曝光</div>
+       <div id="container6" style="height: 100%"></div>
+    </div>
+    <div class='top'></div>
+
+    <script>
+      window.onload = function() {
+      var mySwiper = new Swiper ('.swiper-container', {
+        direction:'vertical',
+        loop: true,
+        autoplay:true,
+        speed:1000,
+      });
+    }     
+  </script>
+    <script>
+      var d=100;
+    var option = {
+        backgroundColor: 'transparent',
+        title: {
+            text: '',
+            subtext: '',
+            left:'center',
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} :{c}%"
+        },
+        visualMap: {
+            show : false,
+            x: '70',
+            y: '550',
+            splitList: [ 
+                {start: 500, end:600},{start: 400, end: 500},
+                {start: 300, end: 400},{start: 200, end: 300},
+                {start: 100, end: 200},{start: 0, end: 100},
+            ],
+            textStyle: {
+                    color: '#abaab7',
+                },
+            color: ['#d11f26', '#5a4d93', '#6c5caf','#7a68ca', '#8873e0', '#927bf8'],
+        },
+        series: [{
+            name: '数据',
+            type: 'map',
+            mapType: 'china', 
+            roam: false,
+            label: {
+                normal: {
+                    show: false
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            data:[
+                {name: '北京',value:550 },{name: '天津',value: 450 },
+                {name: '上海',value:550 },{name: '重庆',value: 150 },
+                {name: '河北',value: 350 },{name: '河南',value: 250 },
+                {name: '云南',value: 250 },{name: '辽宁',value: 350  },
+                {name: '黑龙江',value: 250 },{name: '湖南',value: 250 },
+                {name: '安徽',value: 350  },{name: '山东',value: 350 },
+                {name: '新疆',value:0},{name: '江苏',value: 500 },
+                {name: '浙江',value: 350  },{name: '江西',value: 250 },
+                {name: '湖北',value: 350  },{name: '广西',value: 150 },
+                {name: '甘肃',value: 250 },{name: '山西',value: 150 },
+                {name: '内蒙古',value: 250 },{name: '陕西',value:50 },
+                {name: '吉林',value: 250 },{name: '福建',value: 500 },
+                {name: '贵州',value: 250 },{name: '广东',value:550 },
+                {name: '青海',value: 200 },{name: '西藏',value: 0 },
+                {name: '四川',value: 200 },{name: '宁夏',value: 50 },
+                {name: '海南',value: 350  },{name: '台湾',value:350 },
+                {name: '香港',value: 500 },{name: '澳门',value:350 }
+            ],
+        }]
+    };
+    var chart = echarts.init(document.getElementById('main'));
+    chart.setOption(option);
+    </script>
+    <script type="text/javascript">
+ var dom = document.getElementById("container4");
+ var myChart = echarts.init(dom);
+ var app = {};
+ option = null;
+ app.title = '堆叠条形图';
+option = {
+     grid: {
+         left: '3%',
+         right: '4%',
+         bottom: '3%',
+         containLabel: true
+     },
+     xAxis:  {
+         type: 'value',
+         show: false,
+     },
+
+     yAxis: {
+        axisLine: {show: false},
+        axisTick: {
+            show: false
+        }, 
+        type: 'category',
+        data: ['6.江苏','5.山东','4.广东','3.浙江','2.上海','1.北京',],
+        show: true,
+        axisLabel: {
+            textStyle: {
+                 color: '#fff',
+                 fontSize:'16'
+             },
+         },   
+     },
+     series: [
+         {
+             type: 'bar',
+             barWidth: 10,
+             itemStyle: {
+                     normal: {
+                         color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                             offset: 0,
+                             color: '#3c3864'
+                         }, {
+                             offset: 1,
+                             color: '#3c3864'
+                         }]),
+                         areaStyle: {type: 'default'},
+                     },
+                 },
+             barGap:'-100%',
+             data: [ 920,920, 920, 920,920, 920,],
+         },
+         {
+             type: 'bar',
+             barWidth: 10,
+                 itemStyle: {
+                     normal: {
+                         color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                             offset: 0,
+                             color: '#85beff'
+                         }, {
+                             offset: 1,
+                             color: '#85beff'
+                         }]),
+                         areaStyle: {type: 'default'},
+                         label : {
+                             show: false, 
+                             position: 'right',
+                             formatter: function (params) {
+                                return  params.data;
+                             },
+                             
+                             textStyle: {
+                                 color: '#ffffff'
+                             }
+                         },
+                     },
+                 },
+             data: [232, 232, 301, 134,301, 134 ],
+         },
+     ]
+ };
+ if (option && typeof option === "object") {
+     myChart.setOption(option, true);
+ }
+        </script>
+
+        <script type="text/javascript">
+ var dom = document.getElementById("container3");
+ var myChart = echarts.init(dom);
+ var app = {};
+ option = null;
+ app.title = '堆叠条形图';
+option = {
+     grid: {
+         left: '3%',
+         right: '4%',
+         bottom: '3%',
+         containLabel: true
+     },
+     xAxis:  {
+         type: 'value',
+         show: false,
+     },
+     yAxis: {
+        axisLine: {show: false},
+        axisTick: {
+            show: false
+        }, 
+        type: 'category',
+        data: ['333333          ','444444          ','555555          ','666666          ',],
+        show: true,
+        axisLabel: {
+            textStyle: {
+                 color: '#bebebe',
+                 fontSize:'16'
+             },
+         },   
+     },
+     series: [
+         {
+             type: 'bar',
+             barWidth: 10,
+             itemStyle: {
+                     normal: {
+                         barBorderRadius: 40,
+                         color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                             offset: 0,
+                             color: '#3b3861'
+                         }, {
+                             offset: 1,
+                             color: '#3b3861'
+                         }]),
+                         areaStyle: {type: 'default'},
+                     },
+                 },
+             barGap:'-100%',
+             data: [920, 920, 920, 920,],
+         },
+         {
+             type: 'bar',
+             barWidth: 10,
+                 itemStyle: {
+                     normal: {
+                         barBorderRadius: 40,
+                         color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                             offset: 0,
+                             color: '#b6a5ff'
+                         }, {
+                             offset: 1,
+                             color: '#b6a5ff'
+                         }]),
+                         areaStyle: {type: 'default'},
+                         label : {
+                             show: false, 
+                             position: 'right',
+                             formatter: function (params) {
+                                return  params.data;
+                             },
+                             
+                             textStyle: {
+                                 color: '#ffffff'
+                             }
+                         },
+                     },
+                 },
+             data: [400, 232, 301, 134 ],
+         },
+     ]
+ };
+ if (option && typeof option === "object") {
+     myChart.setOption(option, true);
+ }
+        </script>
+    <script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = '坐标轴刻度与标签对齐';
+
+option = {
+    color: ['#8c87d9'],
+     title: {
+        text: '年龄分布：',
+        x:'3%',
+        top:'10%',
+            textStyle: {
+                    color: '#fff',
+                },   
+    },  
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : ['十九岁以下', '20-29岁', '30-39岁', '40-49岁', '50岁及以上'],
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#abaab7',
+                },
+            },
+            axisLine:{
+                lineStyle:{
+                    color:'#4a427d',
+                           width:2,//这里是为了突出显示加上的，可以去掉
+                }
+            }, 
+        }
+    ],
+    yAxis : [
+        {
+            splitLine: {
+                 show: true,
+                 //  改变轴线颜色
+                lineStyle: {
+                     // 使用深浅的间隔色
+                    color: ['#4a427d']
+                 }                            
+             },
+            type : 'value'
+        }
+    ],
+    series : [
+        {
+            name:'年龄分布',
+            type:'bar',
+            barWidth: '60%',
+            data:[10, 52, 77, 55, 44]
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+       <script type="text/javascript">
+var dom = document.getElementById("container2");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+app.title = '环形图';
+
+option = {
+     title: {
+        text: '',
+        x:'3%',
+        top:'10%',
+            textStyle: {
+                    color: '#fff',
+                },   
+    }, 
+    color: ['#f34851','#85beff',],
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    series: [
+        {
+            name:'性别比例',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: true,
+                    position: 'left',
+                    formatter: "{d}%"
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            itemStyle:{ 
+            normal:{ 
+                  label:{ 
+                    show: true, 
+                      formatter: '{b} : {c} ({d}%)'  
+                   }, 
+                  labelLine :{show:true} 
+                } 
+            },
+            data:[
+                   {value:15, name:'女性比例'},
+                {value:85, name:'男性比例'},
+             
+           
+            ],
+            
+
+
+
+             
+        }
+    ]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+        <script>
+        $(function(){
+            <!--获取li每行的高度，动画移动的高度-->
+            var liHeight = $('li').height();
+            <!--调用插件-->
+            // $('#ulContent').lSlide({nTop:liHeight});
+        })
+    </script>
+    <script type="text/javascript">
+var dom = document.getElementById("container5");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+option = {
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['周一','周二','周三','周四','周五',],
+              splitLine: {
+                 show: true, 
+                lineStyle: {
+                    color: ['#58518c']
+                 }                            
+             },
+             axisLine:{
+                 lineStyle:{
+                     color:'#403e73',
+                }
+             },                         
+            axisLabel: {
+                 textStyle: {
+                     color: '#fff',
+                     fontSize:'16'
+                 },
+             },
+        }
+
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            splitLine: {
+                     show: true,
+                    lineStyle: {
+                        color: ['#58518c']
+                     }                            
+             },
+            axisLabel: {
+                 textStyle: {
+                     color: '#a9a8b1',
+                     fontSize:'16'
+                 },
+             },  
+        }
+    ],
+    series : [
+        {
+            name:'搜索引擎',
+            type:'line',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    fontSize:'16',
+                    background:'red',
+                }
+
+            },
+             symbol: 'circle',     //设定为实心点
+            smooth: true,
+         
+            areaStyle: {
+              normal: {}
+            },
+            color:'rgba(140,135,217,0.5)',
+         
+            data:[5000, 7000, 9000, 11000, 6000,]
+        }
+    ]
+};
+
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+ <script type="text/javascript">
+var dom = document.getElementById("container6");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+
+option = {
+    xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : ['周一','周二','周三','周四','周五',],
+              splitLine: {
+                 show: true, 
+                lineStyle: {
+                    color: ['#58518c']
+                 }                            
+             },
+             axisLine:{
+                 lineStyle:{
+                     color:'#403e73',
+                }
+             },                         
+            axisLabel: {
+                 textStyle: {
+                     color: '#fff',
+                     fontSize:'16'
+                 },
+             },
+        }
+
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            splitLine: {
+                     show: true,
+                    lineStyle: {
+                        color: ['#58518c']
+                     }                            
+             },
+            axisLabel: {
+                 textStyle: {
+                     color: '#a9a8b1',
+                     fontSize:'16'
+                 },
+             },  
+        }
+    ],
+    series : [
+        {
+            name:'搜索引擎',
+            type:'line',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'top',
+                    fontSize:'16',
+                    background:'red',
+                }
+
+            },
+             symbol: 'circle',     //设定为实心点
+            smooth: true,
+         
+            areaStyle: {
+              normal: {}
+            },
+            color:'rgba(140,135,217,0.5)',
+         
+            data:[5000, 7000, 9000, 11000, 6000,]
+        }
+    ]
+};
+
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script>
+
+    <script src='js/echarts-wordcloud.js'></script>
+        <script>
+            var chart = echarts.init(document.getElementById('main2'));
+            var color=["#f34851","#fff","#453f69"];
+            var option = {
+                tooltip: {},
+                series: [ {
+                    type: 'wordCloud',
+                    gridSize: 2,
+                    sizeRange: [12, 50],
+                    rotationRange: [0,0],
+                    shape: 'rectangle',
+                    width: 600,
+                    height: 400,
+                    drawOutOfBound: false,
+                    textStyle: {
+                        normal: {
+                            color: function () {
+                                return color[Math.floor(Math.random()*3)];
+                            },
+                        },
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    data: [
+                        {
+                            name: 'Sam S Club',
+                            value: 1000,
+                            textStyle: {
+                                normal: {
+                                    color: 'red'
+                                },
+                                emphasis: {
+                                    color: 'red'
+                                }
+                            }                            
+                            
+                        },
+                        {
+                            name: '北京时装周',
+                            value: 6181
+                        },
+                        {
+                            name: '学生装',
+                            value: 4386
+                        },
+                        {
+                            name: '搜索指数',
+                            value: 4055
+                        },
+                        {
+                            name: '中国风',
+                            value: 2467
+                        },
+                        {
+                            name: '高级定制',
+                            value: 2244
+                        },
+                        {
+                            name: 'Planet Fitness',
+                            value: 1898
+                        },
+                        {
+                            name: 'Pitch Perfect',
+                            value: 1484
+                        },
+                        {
+                            name: 'Express',
+                            value: 1112
+                        },
+                        {
+                            name: 'Home',
+                            value: 965
+                        },
+                        {
+                            name: 'Johnny Depp',
+                            value: 847
+                        },
+                        {
+                            name: 'Lena Dunham',
+                            value: 582
+                        },
+                        {
+                            name: 'Lewis Hamilton',
+                            value: 555
+                        },
+                        {
+                            name: 'KXAN',
+                            value: 550
+                        },
+                        {
+                            name: 'Mary Ellen Mark',
+                            value: 462
+                        },
+                        {
+                            name: 'Farrah Abraham',
+                            value: 366
+                        },
+                        {
+                            name: 'Rita Ora',
+                            value: 360
+                        },
+                        {
+                            name: 'Serena Williams',
+                            value: 282
+                        },
+                        {
+                            name: 'NCAA baseball tournament',
+                            value: 273
+                        },
+                        {
+                            name: 'Point Break',
+                            value: 265
+                        }
+                    ]
+                } ]
+            };
+            chart.setOption(option);
+
+            setInterval(function () {
+                     chart.setOption(option);
+
+            },2000);
+       
+            window.onresize = chart.resize;
+        </script>
+        
+
+</body>
+</html>
