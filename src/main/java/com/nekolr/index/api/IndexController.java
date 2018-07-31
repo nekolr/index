@@ -47,6 +47,7 @@ public class IndexController extends BaseController {
 
     @GetMapping("/gender")
     @ApiOperation(value = "性别分布", notes = "人群画像之性别分布")
+    @Deprecated
     public ResultBean gender() throws FileNotFoundException {
         return assembleResultOfSuccess(
                 JsonUtils.readObject("classpath:static/gender.json", Gender.class)
