@@ -67,9 +67,18 @@ public class ResultBean<T> implements Serializable {
         this.message = message;
     }
 
+    public ResultBean(boolean status) {
+        this.status = status;
+    }
+
     public ResultBean(T data, String message) {
         this.message = message;
         this.data = data;
+    }
+
+    public ResultBean(String message, Boolean status) {
+        this.message = message;
+        this.status = status;
     }
 
     public ResultBean(T data, String message, Integer code) {

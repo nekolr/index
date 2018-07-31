@@ -25,10 +25,41 @@ public class InnerController extends BaseController {
     public ResultBean start() {
         // 启动模拟登陆以及搜索
         BaiDuIndex.mockSearch();
-        // 执行查询人群画像
-        Map<String, Object> crowd = BaiDuIndex.executeGetSocial("20180101|20180726");
-        // 将结果持久化
-        indexRedisRepository.addCrowd("crowd", crowd);
+
+        return assembleResultOfSuccess("操作成功");
+    }
+
+    @GetMapping("/executeGetSocial")
+    @ApiOperation(value = "执行人群画像爬取", notes = "执行人群画像爬取")
+    public ResultBean executeGetSocial(String time) {
+        if (time == null || time.length() == 0) {
+            assembleResultOfFail("请填写参数");
+        }
+        if (BaiDuIndex.isRunning()) {
+            // 执行查询人群画像
+            Map<String, Object> crowd = BaiDuIndex.executeGetSocial(time);
+            // 将结果持久化
+            indexRedisRepository.addAll("crowd", crowd);
+        } else {
+            return assembleResultOfFail("请先调用 start 方法启动远程控制");
+        }
+        return assembleResultOfSuccess("操作成功");
+    }
+
+    @GetMapping("/executeGetRegion")
+    @ApiOperation(value = "执行地域访问量爬取", notes = "执行地域访问量爬取")
+    public ResultBean executeGetRegion(String time) {
+        if (time == null || time.length() == 0) {
+            assembleResultOfFail("请填写参数");
+        }
+        if (BaiDuIndex.isRunning()) {
+            // 执行查询地域访问量
+            Map<String, Object> distribution = BaiDuIndex.executeGetRegion(time);
+            // 将结果持久化
+            indexRedisRepository.addAll("distribution", distribution);
+        } else {
+            return assembleResultOfFail("请先调用 start 方法启动远程控制");
+        }
 
         return assembleResultOfSuccess("操作成功");
     }

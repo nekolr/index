@@ -26,4 +26,8 @@ public abstract class BaseController {
     public <T> ResultBean<T> assembleResultOfFail(Throwable e) {
         return new ResultBean<>(e);
     }
+
+    public <T> ResultBean<T> assembleResultOfFail(String message) {
+        return new ResultBean<>(message, false);
+    }
 }

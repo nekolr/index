@@ -24,6 +24,7 @@ public class IndexController extends BaseController {
 
     @GetMapping("/chinaMap")
     @ApiOperation(value = "中国地图数据", notes = "中国地图数据")
+    @Deprecated
     public ResultBean chinaMap() throws FileNotFoundException {
         return assembleResultOfSuccess(JsonUtils.readObject("classpath:static/china_provinces.json", ChinaProvince.class));
     }
@@ -54,6 +55,7 @@ public class IndexController extends BaseController {
 
     @GetMapping("/age")
     @ApiOperation(value = "年龄分布", notes = "人群画像之年龄分布")
+    @Deprecated
     public ResultBean age() throws FileNotFoundException {
         return assembleResultOfSuccess(
                 JsonUtils.readObject("classpath:static/age.json", Age.class)
@@ -63,7 +65,7 @@ public class IndexController extends BaseController {
     @GetMapping("/crowd")
     @ApiOperation(value = "人群画像之年龄和性别分布", notes = "人群画像之年龄和性别分布")
     public ResultBean crowd() {
-        return assembleResultOfSuccess(indexRedisRepository.getCrowd("crowd"));
+        return assembleResultOfSuccess(indexRedisRepository.getEntries("crowd"));
     }
 
     @GetMapping("/mediaIndex")
@@ -84,9 +86,7 @@ public class IndexController extends BaseController {
 
     @GetMapping("/distribution")
     @ApiOperation(value = "地域指数", notes = "地域搜索指数")
-    public ResultBean distribution() throws FileNotFoundException {
-        return assembleResultOfSuccess(
-                JsonUtils.readObject("classpath:static/distribution.json", Distribution.class)
-        );
+    public ResultBean distribution() {
+        return assembleResultOfSuccess(indexRedisRepository.getEntries("distribution"));
     }
 }

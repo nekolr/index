@@ -76,6 +76,11 @@ public class BaiDuIndex {
     private static final String GET_SOCIAL_PREFIX = "http://index.baidu.com/Interface/Social/getSocial/";
 
     /**
+     * 获取地域划分
+     */
+    private static final String GET_REGION_PREFIX = "http://index.baidu.com/Interface/Region/getRegion/";
+
+    /**
      * 北京时装周人群画像页面地址
      */
     private static final String CROWD_URL = "http://index.baidu.com/?tpl=crowd&type=0&area=&word=%B1%B1%BE%A9%CA%B1%D7%B0%D6%DC";
@@ -89,6 +94,16 @@ public class BaiDuIndex {
      * 远程控制的客户端的 URL
      */
     private static final String REMOTE_CLIENT_URL = "http://fashion.s1.natapp.cc/wd/hub/";
+
+    /**
+     * 访问百度指数需要携带的参数
+     */
+    private static String res;
+
+    /**
+     * 访问百度指数需要携带的参数2
+     */
+    private static String res2;
 
     /**
      * 驱动
@@ -161,9 +176,9 @@ public class BaiDuIndex {
             // 定位到密码输入框
             WebElement passwordInputPassword = form.findElement(By.name("password"));
             // 输入账号
-            accountInputText.sendKeys("");
+            accountInputText.sendKeys("BlcSaber");
             // 输入密码
-            passwordInputPassword.sendKeys("");
+            passwordInputPassword.sendKeys("lulin872171559");
             // 提交表单
             form.submit();
 
@@ -292,6 +307,8 @@ public class BaiDuIndex {
     public static void quit() {
         if (driver != null) {
             driver.quit();
+            // 清空窗口缓存
+            windowBundlesCache.clear();
         }
     }
 
@@ -319,9 +336,6 @@ public class BaiDuIndex {
      * @throws InterruptedException
      */
     public static Map<String, Object> getAllIndex() throws InterruptedException {
-        // 获取接口需要携带的参数，等待页面加载
-        String res = new WebDriverWait(driver, 10L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.ppt"));
-        String res2 = new WebDriverWait(driver, 5L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.res2"));
         String url = GET_ALL_INDEX_PREFIX + "?res=" + res + "&res2=" + res2;
         return getInterface(url);
     }
@@ -329,10 +343,33 @@ public class BaiDuIndex {
     /**
      * 访问获取人群信息
      *
+     * @param time 20180101|20180726
      * @return
      * @throws InterruptedException
      */
     public static Map<String, Object> getSocial(String time) throws InterruptedException {
+        preRegion(time);
+        String url = GET_SOCIAL_PREFIX + "?res=" + res + "&res2=" + res2;
+        return getInterface(url);
+    }
+
+    /**
+     * 访问地域信息
+     *
+     * @param time 时间段，如 20180101|20180726
+     * @return
+     * @throws InterruptedException
+     */
+    public static Map<String, Object> getRegion(String time) throws InterruptedException {
+        preRegion(time);
+        String url = GET_REGION_PREFIX + "?res=" + res + "&res2=" + res2;
+        return getInterface(url);
+    }
+
+    /**
+     * 执行人群画像之前需要执行的方法，需要在 getSocial getRegion 之前执行
+     */
+    private static void preRegion(String time) {
         // 切换回主页
         driver.switchTo().window(windowBundlesCache.get("main"));
         // 需要先访问人群画像页面，目的是修改日期参数
@@ -340,10 +377,8 @@ public class BaiDuIndex {
         // 存储人群画像窗口句柄
         windowBundlesCache.put("crowd", driver.getWindowHandle());
         // 获取接口需要携带的参数，等待页面加载
-        String res = new WebDriverWait(driver, 10L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.ppt"));
-        String res2 = new WebDriverWait(driver, 5L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.res2"));
-        String url = GET_SOCIAL_PREFIX + "?res=" + res + "&res2=" + res2;
-        return getInterface(url);
+        res = new WebDriverWait(driver, 10L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.ppt"));
+        res2 = new WebDriverWait(driver, 5L).until(f -> (String) ((RemoteWebDriver) driver).executeScript("return PPval.res2"));
     }
 
     /**
@@ -362,5 +397,14 @@ public class BaiDuIndex {
      */
     public static Map<String, Object> executeGetAllIndex() {
         return executeTask(() -> getAllIndex());
+    }
+
+    /**
+     * 执行获取获取地域信息的接口
+     *
+     * @return
+     */
+    public static Map<String, Object> executeGetRegion(String time) {
+        return executeTask(() -> getRegion(time));
     }
 }

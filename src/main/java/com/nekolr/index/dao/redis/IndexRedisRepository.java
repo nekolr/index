@@ -17,11 +17,11 @@ public class IndexRedisRepository {
     @Resource(name = "redisTemplate")
     private HashOperations<String, Object, Object> hashOperations;
 
-    public void addCrowd(String key, Object value) {
+    public void addAll(String key, Object value) {
         hashOperations.putAll(key, (Map<?, ?>) value);
     }
 
-    public Map<Object, Object> getCrowd(String key) {
+    public Map<Object, Object> getEntries(String key) {
         return hashOperations.entries(key);
     }
 }
