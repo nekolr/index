@@ -176,9 +176,9 @@ public class BaiDuIndex {
             // 定位到密码输入框
             WebElement passwordInputPassword = form.findElement(By.name("password"));
             // 输入账号
-            accountInputText.sendKeys("BlcSaber");
+            accountInputText.sendKeys("");
             // 输入密码
-            passwordInputPassword.sendKeys("lulin872171559");
+            passwordInputPassword.sendKeys("");
             // 提交表单
             form.submit();
 

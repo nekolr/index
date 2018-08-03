@@ -90,4 +90,12 @@ public class IndexController extends BaseController {
     public ResultBean distribution() {
         return assembleResultOfSuccess(indexRedisRepository.getEntries("distribution"));
     }
+
+    @GetMapping("/information")
+    @ApiOperation(value = "资讯", notes = "资讯")
+    public ResultBean information() throws FileNotFoundException {
+        return assembleResultOfSuccess(
+                JsonUtils.readArray("classpath:static/information.json", Information.class)
+        );
+    }
 }
