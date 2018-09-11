@@ -4,12 +4,14 @@ import com.nekolr.index.common.BaseController;
 import com.nekolr.index.common.ResultBean;
 import com.nekolr.index.dao.redis.IndexRedisRepository;
 import com.nekolr.index.selenium.BaiDuIndex;
+import com.nekolr.index.spider.BeijingFashionWeekSpider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import us.codecraft.webmagic.Spider;
 
 import java.util.Map;
 
@@ -69,5 +71,21 @@ public class InnerController extends BaseController {
     public ResultBean quit() {
         BaiDuIndex.quit();
         return assembleResultOfSuccess("操作成功");
+    }
+
+    @GetMapping("/collectInfo")
+    @ApiOperation(value = "收集官网资讯", notes = "收集官网资讯")
+    public ResultBean collectInfo() {
+        try {
+            BeijingFashionWeekSpider spider = new BeijingFashionWeekSpider();
+            spider.setIndexRedisRepository(indexRedisRepository);
+            Spider.create(spider)
+                    .addUrl("http://bjfashionweek.org/artlist/cid-71/")
+                    .thread(3)
+                    .run();
+            return assembleResultOfSuccess("操作成功");
+        } catch (Exception e) {
+            return assembleResultOfFail("操作失败");
+        }
     }
 }

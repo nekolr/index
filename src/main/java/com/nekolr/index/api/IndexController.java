@@ -93,9 +93,13 @@ public class IndexController extends BaseController {
 
     @GetMapping("/information")
     @ApiOperation(value = "资讯", notes = "资讯")
-    public ResultBean information() throws FileNotFoundException {
-        return assembleResultOfSuccess(
-                JsonUtils.readArray("classpath:static/information.json", Information.class)
-        );
+    public ResultBean information() {
+        return assembleResultOfSuccess(indexRedisRepository.getSetElements("infoList"));
+    }
+
+    @GetMapping("/delKey")
+    @ApiOperation(value = "删除键", notes = "删除键")
+    public ResultBean delKey() {
+        return assembleResultOfSuccess(indexRedisRepository.delKey("infoList"));
     }
 }
